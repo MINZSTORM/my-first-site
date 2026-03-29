@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Better Eats – Livraison de repas à domicile</title>
+
+  <!-- Bootstrap CSS (grille + composants) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+
+  <!-- Google Fonts — Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Notre CSS personnalisé -->
+  <link rel="stylesheet" href="style.css"/>
+
+</head>
+<body>
+
+<!-- =============================================
+     NAVBAR — barre de navigation en haut
+============================================= -->
+<nav class="navbar-ue">
+  <div class="navbar-inner">
+
+    <!-- Logo -->
+    <a href="#accueil" class="logo-ue">Better <span>Eats</span></a>
+
+    <!-- Liens de navigation (desktop) -->
+    <div class="nav-droite">
+      <a href="#accueil">Accueil</a>
+      <a href="#apropos">À propos</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+      <a href="#" class="btn-connexion">Se connecter</a>
+    </div>
+
+    <!-- Bouton hamburger (mobile seulement) -->
+    <button class="navbar-toggler d-lg-none" type="button"
+            data-bs-toggle="collapse" data-bs-target="#mobileNav"
+            style="border:none; background:none; font-size:1.4rem">
+      <i class="bi bi-list"></i>
+    </button>
+
+  </div>
+
+  <!-- Menu mobile (se déplie quand on clique sur hamburger) -->
+  <div class="collapse navbar-collapse" id="mobileNav">
+    <ul class="list-unstyled p-3 border-top">
+      <li class="py-2"><a href="#accueil"  style="font-size:14px; font-weight:500">Accueil</a></li>
+      <li class="py-2"><a href="#apropos"  style="font-size:14px; font-weight:500">À propos</a></li>
+      <li class="py-2"><a href="#blog"     style="font-size:14px; font-weight:500">Blog</a></li>
+      <li class="py-2"><a href="#contact"  style="font-size:14px; font-weight:500">Contact</a></li>
+      <li class="py-2"><a href="#"         style="font-size:14px; font-weight:500">Se connecter</a></li>
+    </ul>
+  </div>
+
+</nav>
+
+
+<!-- =============================================
+     HERO — grande bannière principale
+============================================= -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Faites-vous livrer depuis les meilleurs restaurants</h1>
+
+    <!-- Barre de recherche d'adresse -->
+    <div class="barre-adresse">
+      <i class="bi bi-geo-alt-fill"></i>
+      <input type="text" id="input-adresse" placeholder="Entrez votre adresse de livraison"/>
+      <button class="btn-trouver" onclick="rechercherRestaurants()">Trouver des restaurants</button>
+    </div>
+
+    <!-- Message d'erreur (caché par défaut, affiché par le JS) -->
+    <p id="erreur-adresse">⚠️ Veuillez entrer une adresse de livraison.</p>
+
+    <p class="hero-lien">
+      Vous êtes coursier ? <a href="#livreur">Livrez avec Better Eats</a>
+    </p>
+  </div>
+</section>
+
+
+<!-- =============================================
+     CATÉGORIES — les icônes de type de cuisine
+============================================= -->
+<section id="accueil">
+  <div class="categories-inner">
+    <h2 class="titre-section">Que souhaitez-vous manger ?</h2>
+
+    <!-- Grille Bootstrap : 6 colonnes sur desktop, 4 sur tablette, 3 sur mobile -->
+    <div class="row g-2">
+      <div class="col-4 col-sm-3 col-md-2">
+        <div class="cat-item" onclick="filtrerCategorie('Pizza')">
+          <div class="cat-icon">🍕</div><p>Pizza</p>
+        </div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2">
+        <div class="cat-item" onclick="filtrerCategorie('Burger')">
+          <div class="cat-icon">🍔</div><p>Burger</p>
+        </div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2">
+        <div class="cat-item" onclick="filtrerCategorie('Sushi')">
+          <div class="cat-icon">🍣</div><p>Sushi</p>
+        </div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2">
+        <div class="cat-item" onclick="filtrerCategorie('Salade')">
+          <div class="cat-icon">🥗</div><p>Salade</p>
+        </div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2">
+        <div class="cat-item" onclick="filtrerCategorie('Tacos')">
+          <div class="cat-icon">🌮</div><p>Tacos</p>
+        </div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2">
+        <div class="cat-item" onclick="filtrerCategorie('Asiatique')">
+          <div class="cat-icon">🍜</div><p>Asiatique</p>
+        </div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2">
+        <div class="cat-item" onclick="filtrerCategorie('Kebab')">
+          <div class="cat-icon">🥙</div><p>Kebab</p>
+        </div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2">
+        <div class="cat-item" onclick="filtrerCategorie('Poulet')">
+          <div class="cat-icon">🍗</div><p>Poulet</p>
+        </div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2">
+        <div class="cat-item" onclick="filtrerCategorie('Desserts')">
+          <div class="cat-icon">🧁</div><p>Desserts</p>
+        </div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2">
+        <div class="cat-item" onclick="filtrerCategorie('Courses')">
+          <div class="cat-icon">🛒</div><p>Courses</p>
+        </div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2">
+        <div class="cat-item" onclick="filtrerCategorie('Boulangerie')">
+          <div class="cat-icon">🥐</div><p>Boulangerie</p>
+        </div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2">
+        <div class="cat-item" onclick="filtrerCategorie('Glaces')">
+          <div class="cat-icon">🍦</div><p>Glaces</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     RESTAURANTS — grille de cards
+     data-categorie : utilisé par le JS pour filtrer
+============================================= -->
+<section id="restaurants">
+  <div class="restaurants-inner">
+    <h2 class="titre-section" id="titre-restaurants">Restaurants populaires près de chez vous</h2>
+
+    <!-- Bouton pour réinitialiser le filtre (caché par défaut) -->
+    <button id="btn-reset-filtre" onclick="resetFiltre()"
+      style="display:none; background:var(--gris-fond); border:none; border-radius:8px;
+             padding:8px 16px; font-size:13px; font-weight:600; cursor:pointer;
+             margin-bottom:20px; color:var(--gris-texte); font-family:'Poppins',sans-serif;">
+      <i class="bi bi-x-circle me-1"></i> Voir tous les restaurants
+    </button>
+
+    <div class="row g-4" id="grille-restaurants">
+
+      <!-- Card 1 -->
+      <div class="col-12 col-sm-6 col-md-3" data-categorie="Pizza">
+        <div class="card-resto">
+          <div class="card-resto-img">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80" alt="Pizza"/>
+            <span class="badge-promo">-20% sur votre commande</span>
+          </div>
+          <div class="card-resto-body">
+            <h5>Pizzeria Roma</h5>
+            <div class="card-infos">
+              <span class="note">⭐ 4.8</span><span class="separateur">•</span>
+              <span>20–30 min</span><span class="separateur">•</span>
+              <span>Livraison 1,99 €</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-12 col-sm-6 col-md-3" data-categorie="Burger">
+        <div class="card-resto">
+          <div class="card-resto-img">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80" alt="Burger"/>
+          </div>
+          <div class="card-resto-body">
+            <h5>Big Burger Club</h5>
+            <div class="card-infos">
+              <span class="note">⭐ 4.6</span><span class="separateur">•</span>
+              <span>25–40 min</span><span class="separateur">•</span>
+              <span>Livraison gratuite</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-12 col-sm-6 col-md-3" data-categorie="Sushi">
+        <div class="card-resto">
+          <div class="card-resto-img">
+            <img src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=400&q=80" alt="Sushi"/>
+            <span class="badge-promo">Livraison offerte</span>
+          </div>
+          <div class="card-resto-body">
+            <h5>Sushi Tokyo</h5>
+            <div class="card-infos">
+              <span class="note">⭐ 4.9</span><span class="separateur">•</span>
+              <span>30–45 min</span><span class="separateur">•</span>
+              <span>Livraison gratuite</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-12 col-sm-6 col-md-3" data-categorie="Salade">
+        <div class="card-resto">
+          <div class="card-resto-img">
+            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=400&q=80" alt="Salade"/>
+          </div>
+          <div class="card-resto-body">
+            <h5>Green Bowl</h5>
+            <div class="card-infos">
+              <span class="note">⭐ 4.7</span><span class="separateur">•</span>
+              <span>15–25 min</span><span class="separateur">•</span>
+              <span>Livraison 0,99 €</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="col-12 col-sm-6 col-md-3" data-categorie="Tacos">
+        <div class="card-resto">
+          <div class="card-resto-img">
+            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80" alt="Tacos"/>
+            <span class="badge-promo">-15%</span>
+          </div>
+          <div class="card-resto-body">
+            <h5>Tacos Factory</h5>
+            <div class="card-infos">
+              <span class="note">⭐ 4.5</span><span class="separateur">•</span>
+              <span>20–35 min</span><span class="separateur">•</span>
+              <span>Livraison 1,49 €</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="col-12 col-sm-6 col-md-3" data-categorie="Asiatique">
+        <div class="card-resto">
+          <div class="card-resto-img">
+            <img src="https://images.unsplash.com/photo-1562802378-063ec186a863?w=400&q=80" alt="Asiatique"/>
+          </div>
+          <div class="card-resto-body">
+            <h5>Wok & Noodles</h5>
+            <div class="card-infos">
+              <span class="note">⭐ 4.7</span><span class="separateur">•</span>
+              <span>25–40 min</span><span class="separateur">•</span>
+              <span>Livraison 1,99 €</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="col-12 col-sm-6 col-md-3" data-categorie="Burger">
+        <div class="card-resto">
+          <div class="card-resto-img">
+            <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=400&q=80" alt="Burger 2"/>
+            <span class="badge-promo">Nouveau</span>
+          </div>
+          <div class="card-resto-body">
+            <h5>Le Gourmet Burger</h5>
+            <div class="card-infos">
+              <span class="note">⭐ 4.4</span><span class="separateur">•</span>
+              <span>30–45 min</span><span class="separateur">•</span>
+              <span>Livraison 2,49 €</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="col-12 col-sm-6 col-md-3" data-categorie="Pizza">
+        <div class="card-resto">
+          <div class="card-resto-img">
+            <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&q=80" alt="Pizza 2"/>
+          </div>
+          <div class="card-resto-body">
+            <h5>Pizza Express</h5>
+            <div class="card-infos">
+              <span class="note">⭐ 4.3</span><span class="separateur">•</span>
+              <span>20–30 min</span><span class="separateur">•</span>
+              <span>Livraison gratuite</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- fin grille restaurants -->
+  </div>
+</section>
+
+
+<!-- =============================================
+     COMMENT ÇA MARCHE — 3 étapes
+============================================= -->
+<section id="comment">
+  <div class="comment-inner">
+    <h2>Comment ça marche ?</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="etape-icone">📍</div>
+        <h4 class="etape-titre">1. Entrez votre adresse</h4>
+        <p class="etape-desc">Indiquez votre adresse de livraison pour découvrir tous les restaurants disponibles près de chez vous.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="etape-icone">🛒</div>
+        <h4 class="etape-titre">2. Choisissez vos plats</h4>
+        <p class="etape-desc">Parcourez les menus et ajoutez vos plats préférés à votre panier en quelques clics.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="etape-icone">🚴</div>
+        <h4 class="etape-titre">3. Faites-vous livrer</h4>
+        <p class="etape-desc">Suivez votre commande en temps réel. Votre repas arrive directement à votre porte !</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     DEVENEZ LIVREUR — fond noir
+============================================= -->
+<section id="livreur">
+  <div class="livreur-inner">
+    <div class="livreur-grid">
+      <div>
+        <h2>Gagnez de l'argent en livrant avec Better Eats</h2>
+        <p>Devenez coursier partenaire et travaillez quand vous le souhaitez. Fixez vos propres horaires et gagnez de l'argent à votre rythme, à vélo, scooter ou voiture.</p>
+        <a href="#contact" class="btn-vert">Commencer à livrer</a>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1617347454431-f49d7ff5c3b1?w=700&q=80" alt="Livreur Better Eats"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     RESTAURANT PARTENAIRE — fond vert
+============================================= -->
+<section id="restaurant">
+  <div class="restaurant-inner">
+    <div class="restaurant-grid">
+      <div>
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80" alt="Restaurant partenaire"/>
+      </div>
+      <div>
+        <h2>Vous avez un restaurant ? Rejoignez Better Eats</h2>
+        <p>Augmentez votre visibilité et atteignez des milliers de clients. Notre plateforme aide plus de 700 000 restaurants à développer leur activité.</p>
+        <a href="#contact" class="btn-blanc">Ajouter votre restaurant</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     À PROPOS
+============================================= -->
+<section id="apropos">
+  <div class="apropos-inner">
+
+    <!-- Texte + image -->
+    <div class="apropos-grid">
+      <div>
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&q=80" alt="Notre équipe"/>
+      </div>
+      <div>
+        <h2>Notre histoire</h2>
+        <p>Better Eats est née en 2020 d'une idée simple : connecter les gens avec les meilleurs restaurants de leur ville, rapidement et facilement.</p>
+        <p>Aujourd'hui, nous sommes présents dans plus de 50 villes, avec plus de 700 000 restaurants partenaires et des millions de clients satisfaits chaque jour.</p>
+        <p>Notre mission est de rendre la livraison de repas accessible à tous, tout en soutenant les restaurateurs locaux dans leur développement.</p>
+      </div>
+    </div>
+
+    <!-- Statistiques (animées par le JS) -->
+    <div class="stats-grid mt-5">
+      <div class="stat-card">
+        <span class="stat-num" id="stat-villes">0</span>
+        <div class="stat-label">Villes couvertes</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" id="stat-restaurants">0</span>
+        <div class="stat-label">Restaurants partenaires</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" id="stat-clients">0</span>
+        <div class="stat-label">Clients satisfaits</div>
+      </div>
+    </div>
+
+    <!-- Valeurs de l'entreprise -->
+    <div class="valeurs">
+      <h3>Nos valeurs</h3>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="valeur-item">
+            <div class="valeur-icone">⚡</div>
+            <div class="valeur-texte">
+              <h5>Rapidité</h5>
+              <p>Nous garantissons des livraisons rapides pour que vos repas arrivent chauds et frais.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="valeur-item">
+            <div class="valeur-icone">💚</div>
+            <div class="valeur-texte">
+              <h5>Durabilité</h5>
+              <p>Nous favorisons les emballages écologiques et les livraisons à vélo pour réduire notre empreinte carbone.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="valeur-item">
+            <div class="valeur-icone">🤝</div>
+            <div class="valeur-texte">
+              <h5>Communauté</h5>
+              <p>Nous soutenons les restaurateurs locaux et offrons des conditions équitables à nos livreurs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =============================================
+     BLOG — 3 articles
+============================================= -->
+<section id="blog">
+  <div class="blog-inner">
+    <h2 class="titre-section">Le Blog Better Eats</h2>
+    <p style="color:var(--gris-texte); margin-bottom:40px; font-size:15px;">
+      Actualités, conseils culinaires et coulisses de la livraison.
+    </p>
+
+    <div class="row g-4">
+
+      <!-- Article 1 -->
+      <div class="col-12 col-md-4">
+        <div class="card-blog">
+          <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=600&q=80" alt="Article nutrition"/>
+          <div class="card-blog-body">
+            <span class="blog-tag">Nutrition</span>
+            <h5>5 conseils pour commander sainement en livraison</h5>
+            <p>Manger équilibré tout en commandant à domicile, c'est possible ! Voici nos astuces pour faire les bons choix.</p>
+            <div class="blog-meta">
+              <img src="https://i.pravatar.cc/32?img=1" alt="Marie L."/>
+              <span>Marie L. · 12 jan. 2025</span>
+            </div>
+            <div style="margin-top:16px">
+              <a href="#" class="lire-plus">Lire l'article <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="col-12 col-md-4">
+        <div class="card-blog">
+          <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?w=600&q=80" alt="Article restaurateurs"/>
+          <div class="card-blog-body">
+            <span class="blog-tag">Restaurateurs</span>
+            <h5>Comment augmenter vos ventes grâce à la livraison en ligne</h5>
+            <p>Découvrez les stratégies utilisées par les meilleurs restaurants partenaires pour booster leur chiffre d'affaires.</p>
+            <div class="blog-meta">
+              <img src="https://i.pravatar.cc/32?img=8" alt="Thomas R."/>
+              <span>Thomas R. · 5 fév. 2025</span>
+            </div>
+            <div style="margin-top:16px">
+              <a href="#" class="lire-plus">Lire l'article <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 3 -->
+      <div class="col-12 col-md-4">
+        <div class="card-blog">
+          <img src="https://images.unsplash.com/photo-1519861531473-9200262188bf?w=600&q=80" alt="Article livreur"/>
+          <div class="card-blog-body">
+            <span class="blog-tag">Livreurs</span>
+            <h5>La vie d'un livreur Better Eats : témoignage</h5>
+            <p>Karim, 26 ans, nous raconte son quotidien de coursier partenaire et comment il organise ses journées.</p>
+            <div class="blog-meta">
+              <img src="https://i.pravatar.cc/32?img=12" alt="Karim D."/>
+              <span>Karim D. · 20 mars 2025</span>
+            </div>
+            <div style="margin-top:16px">
+              <a href="#" class="lire-plus">Lire l'article <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     CONTACT — infos + formulaire
+============================================= -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-grid">
+
+      <!-- Informations de contact -->
+      <div class="contact-infos">
+        <h2>Nous contacter</h2>
+        <p>Une question, une suggestion ou un problème ? Notre équipe est disponible 7j/7 pour vous aider.</p>
+
+        <div class="contact-item">
+          <div class="contact-icone"><i class="bi bi-envelope"></i></div>
+          <div>
+            <h6>Email</h6>
+            <span>support@bettereats.fr</span>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icone"><i class="bi bi-telephone"></i></div>
+          <div>
+            <h6>Téléphone</h6>
+            <span>+33 1 23 45 67 89</span>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icone"><i class="bi bi-geo-alt"></i></div>
+          <div>
+            <h6>Adresse</h6>
+            <span>12 rue de la Paix, 75001 Paris</span>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icone"><i class="bi bi-clock"></i></div>
+          <div>
+            <h6>Horaires du support</h6>
+            <span>Lun–Dim · 8h00 – 22h00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulaire de contact -->
+      <div class="form-contact">
+        <h3>Envoyez-nous un message</h3>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="prenom">Prénom *</label>
+              <input type="text" id="prenom" placeholder="Votre prénom"/>
+              <div class="msg-erreur" id="err-prenom">Veuillez entrer votre prénom.</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="nom">Nom *</label>
+              <input type="text" id="nom" placeholder="Votre nom"/>
+              <div class="msg-erreur" id="err-nom">Veuillez entrer votre nom.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" placeholder="votre@email.com"/>
+          <div class="msg-erreur" id="err-email">Veuillez entrer un email valide.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="sujet">Sujet *</label>
+          <select id="sujet">
+            <option value="">Choisissez un sujet</option>
+            <option value="commande">Problème avec une commande</option>
+            <option value="livreur">Devenir livreur</option>
+            <option value="restaurant">Référencer mon restaurant</option>
+            <option value="autre">Autre demande</option>
+          </select>
+          <div class="msg-erreur" id="err-sujet">Veuillez choisir un sujet.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message *</label>
+          <textarea id="message" placeholder="Décrivez votre demande..."></textarea>
+          <div class="msg-erreur" id="err-message">Veuillez entrer un message (10 caractères minimum).</div>
+        </div>
+
+        <button class="btn-envoyer" onclick="envoyerFormulaire()">
+          <i class="bi bi-send me-2"></i>Envoyer le message
+        </button>
+
+        <!-- Message de succès (caché par défaut) -->
+        <div id="msg-succes">
+          <i class="bi bi-check-circle me-2"></i>
+          Votre message a été envoyé avec succès ! Nous vous répondrons dans les 24h.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     FOOTER — pied de page
+============================================= -->
+<footer>
+  <div class="footer-inner">
+    <div class="row g-5">
+
+      <!-- Colonne 1 : Logo + réseaux sociaux -->
+      <div class="col-12 col-md-4">
+        <div class="footer-logo">Better <span>Eats</span></div>
+        <p style="font-size:13px; line-height:1.8; margin-bottom:20px">
+          Livraison de repas et courses à domicile depuis les meilleurs restaurants et commerces près de chez vous.
+        </p>
+        <div style="display:flex; gap:14px">
+          <a href="#" style="color:rgba(255,255,255,0.6); font-size:1.3rem"><i class="bi bi-instagram"></i></a>
+          <a href="#" style="color:rgba(255,255,255,0.6); font-size:1.3rem"><i class="bi bi-facebook"></i></a>
+          <a href="#" style="color:rgba(255,255,255,0.6); font-size:1.3rem"><i class="bi bi-twitter-x"></i></a>
+        </div>
+      </div>
+
+      <!-- Colonne 2 : Navigation -->
+      <div class="col-6 col-md-2">
+        <h6>Navigation</h6>
+        <ul>
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#apropos">À propos</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Colonne 3 : Produits -->
+      <div class="col-6 col-md-2">
+        <h6>Produits</h6>
+        <ul>
+          <li><a href="#">Commander</a></li>
+          <li><a href="#">Better Eats Pro</a></li>
+          <li><a href="#">Business</a></li>
+          <li><a href="#">Gift Cards</a></li>
+        </ul>
+      </div>
+
+      <!-- Colonne 4 : Application mobile -->
+      <div class="col-12 col-md-4">
+        <h6>Téléchargez l'application</h6>
+        <p style="font-size:13px; margin-bottom:16px; color:rgba(255,255,255,0.55)">
+          Commandez encore plus facilement depuis votre téléphone.
+        </p>
+        <div style="display:flex; flex-direction:column; gap:10px; max-width:180px">
+          <a href="#" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:10px 16px; display:flex; align-items:center; gap:10px">
+            <i class="bi bi-apple" style="font-size:1.4rem; color:#fff"></i>
+            <div>
+              <div style="font-size:10px; color:rgba(255,255,255,0.6)">Disponible sur l'</div>
+              <div style="font-size:13px; font-weight:700; color:#fff">App Store</div>
+            </div>
+          </a>
+          <a href="#" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:10px 16px; display:flex; align-items:center; gap:10px">
+            <i class="bi bi-google-play" style="font-size:1.4rem; color:#fff"></i>
+            <div>
+              <div style="font-size:10px; color:rgba(255,255,255,0.6)">Disponible sur</div>
+              <div style="font-size:13px; font-weight:700; color:#fff">Google Play</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bas du footer : copyright + liens légaux -->
+    <div class="footer-bottom">
+      <span>© 2025 Better Technologies, Inc.</span>
+      <div style="display:flex; gap:20px; flex-wrap:wrap">
+        <a href="#" style="color:rgba(255,255,255,0.35); font-size:12px">Confidentialité</a>
+        <a href="#" style="color:rgba(255,255,255,0.35); font-size:12px">Accessibilité</a>
+        <a href="#" style="color:rgba(255,255,255,0.35); font-size:12px">Mentions légales</a>
+        <a href="#" style="color:rgba(255,255,255,0.35); font-size:12px">Cookies</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- Toast notification (affiché par le JS) -->
+<div class="toast-notif" id="toast">
+  <i class="bi bi-check-circle-fill"></i>
+  <span id="toast-msg">Action effectuée</span>
+</div>
+
+
+<!-- Bootstrap JS (nécessaire pour le menu mobile) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Notre JavaScript personnalisé — toujours en dernier ! -->
+<script src="script.js"></script>
+
+</body>
+</html>
